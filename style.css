@@ -1,0 +1,101 @@
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background: rgb(35, 28, 165);
+    background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,121,118,1) 35%, rgba(0,212,255,1) 100%);
+}
+
+.header {
+    display: flex;
+    justify-content: center;
+}
+
+.title {
+    font-size: 48px;
+}
+
+.body {
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    padding-top: 20%;
+    
+}
+
+.form {
+    display: flex;
+    align-content: center;
+}
+
+.todo {
+    background-color: white;
+    display: flex;
+}
+li {
+    list-style-type: none;
+    padding-left: 5px;
+}
+
+.complete {
+    background-color: rgb(59, 224, 59);
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    width: 10%;
+}
+
+.completed {
+    text-decoration: line-through;
+}
+
+.delete {
+    justify-self: flex-end;
+    margin-left: auto;
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    width: 10%;
+    background-color: red;
+}
+
+.project-headers {
+    display: flex;
+}
+
+.project-buttons {
+    order: 99;
+}
+
+#form { 
+    text-align: center;  
+    display: flex;
+    justify-content: center;
+    display: none;
+}
+
+#formcontent {
+    border: 2px solid;
+    width: 300px;
+    height: 400px;
+    margin: auto;
+    position: absolute;
+    background-color: black;
+}
+
+#close {
+    text-align: left;
+    color: red;
+    font-size: 36px;
+    line-height: 1;
+}
+
+.label {
+    color: white;
+}
