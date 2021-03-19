@@ -41,9 +41,9 @@ function changeProject(parent, name) {
     //find project from projects array, use list of todos and create all the todos from it
 }
 
-function loadProject(project, name, description, color, list,) {
+function loadProject(project) {
     for (let i = 0; i < project.list.length; i++) {
-        addTodos(project.list[i].title, project);
+        addTodos(project.list[i].title, project, project.list[i].checklist, i);
     }
 
 }
@@ -73,7 +73,7 @@ entry.addEventListener('keyup', function(event)  {
 let currentProject = defaults;
 projects.push(defaults);
 
-function addTodos(text, project) {
+function addTodos(text, project, completed, index) {
     let list = document.querySelector('.list');
     const todoDiv = document.createElement("div");
     todoDiv.classList.add("todo");
@@ -100,20 +100,24 @@ function addTodos(text, project) {
     completeTodo.addEventListener('click', () => {
         if (!newTodo.classList.contains('completed')) {
             newTodo.classList.add('completed');
+            project.list[index].checklist = 'completed';
         } else {
             newTodo.classList.remove('completed');
+            project.list[index].checklist = '';
         }
     })
     list.appendChild(todoDiv);
 
     deleteTodo.addEventListener('click', () => {
         todoDiv.parentNode.removeChild(todoDiv);
-        for (let i = 0; i < project.list.length; i++) {
-            if (text == project.list[i].title) {
-                project.list.splice(i, 1);
-            }
-        }
+        project.list.splice(index, 1);
     })
+
+    if (project) {
+        if (completed == 'completed') {
+            newTodo.classList.add('completed');
+        }
+    }
 }
 let formContainer = document.querySelector('#form');
 
