@@ -2,7 +2,7 @@
     margin: 0px;
     padding: 0px;
     box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Work Sans', sans-serif;
 }
 
 body {
@@ -15,8 +15,22 @@ body {
     justify-content: center;
 }
 
+.header-container {
+    border-style: solid;
+    color: white;
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    border-radius: 3px;
+}
+
+.header-container:hover {
+    background-color: rgba(196, 31, 196, 0.747);
+}
+
 .title {
-    font-size: 48px;
+    font-size: 68px;
+    color: white;
 }
 
 .body {
@@ -24,7 +38,6 @@ body {
     align-content: center;
     justify-content: center;
     padding-top: 15%;
-    
 }
 
 .form {
@@ -32,9 +45,16 @@ body {
     align-content: center;
 }
 
+#todo {
+    height: 2em;
+    border-color: white;
+    border-radius: 3px;
+}
+
 .todo {
     background-color: white;
     display: flex;
+    border-radius: 3px;
 }
 li {
     list-style-type: none;
@@ -96,6 +116,76 @@ li {
     line-height: 1;
 }
 
+#Name, #Description, #Due, #Completed {
+    color: black;
+    font-weight: bold;
+    padding-top: 10px;
+    font-size: 24px;
+    height: 35px;
+    width: 176px;
+}
+.submit {
+    margin: auto;
+    width: 50%;
+    margin-top: 25px;
+}
+
 .label {
     color: white;
+}
+
+.button2 {
+    display:inline-block;
+    padding:0.35em 1.2em;
+    border:0.1em solid #FFFFFF;
+    margin:0 0.3em 0.3em 0;
+    border-radius:0.12em;
+    box-sizing: border-box;
+    text-decoration:none;
+    font-family:'Roboto',sans-serif;
+    font-weight:300;
+    color:#FFFFFF;
+    text-align:center;
+    transition: all 0.2s;
+    background-color: rgba(35, 28, 165, 0)
+}
+.button2:hover{
+    color:#000000;
+    background-color: #FFFFFF;
+}
+.button2:active{
+    color:#BBBBBB;
+    border-color:#BBBBBB;
+}
+
+@media all and (max-width:30em){
+.button2{
+    display:block;
+    margin:0.4em auto;
+    }
+} 
+
+.complete, .delete {
+    border-radius:3px;
+	border:1px solid #0b0e07;
+	cursor:pointer;
+	font-family:Arial;
+	font-size:15px;
+	text-decoration:none;
+    text-shadow:0px 1px 0px #263666;
+    display: inline-block;
+    vertical-align: middle;
+    -webkit-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+    -webkit-transition-property: transform;
+    transition-property: transform;
+}
+
+.complete:hover, .delete:focus, .complete:focus, .delete:hover {
+    -webkit-transform: scale(1.05);
+    transform: scale(1.05);
+  }
+
+.complete:active, .delete:active {
+    top: .1em;
 }

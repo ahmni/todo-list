@@ -132,6 +132,7 @@ function createForm() {
     const submit = document.createElement('button');
     submit.type = 'button';
     submit.classList.add('submit');
+    submit.classList.add('button2');
     submit.innerHTML = 'Add';
     form.appendChild(submit);
     //submit.style.display = 'none';
@@ -178,7 +179,8 @@ function addProjectbtn(name, project) {
     let projectContainer = document.querySelector('.project-headers');
     const newProject = document.createElement("button");
     const list = document.querySelector('.list');
-    newProject.classList.add('project');
+    newProject.classList.add('project')
+    newProject.classList.add('button2');
     newProject.innerHTML = name;
     projectContainer.appendChild(newProject);
     newProject.addEventListener('click', () => {
