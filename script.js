@@ -2,6 +2,7 @@ const entry = document.querySelector('#todo');
 
 let projects = [];
 
+
 class todo {
     constructor(title, description, dueDate, priority, notes, checklist) {
         this.title = title;
@@ -27,13 +28,24 @@ let project = class {
         addTodos(entry.value);
         this.list.push(newtodo);
     }
+
+    static fromJSON(serializedJson) {
+        return Object.assign(new project(), JSON.parse(serializedJson))
+    }
 }
 
 function createProject(name, description, color, list) {
     let newProject = new project(name, description, color, list)
     return newProject;
 }
+if (storageAvailable('localStorage')) {
+    getProjects(projects);
+    projects.forEach(proj => {
+        addProjectbtn(proj.name, proj);
+    });
+}
 
+let currentProject = projects[0];
 function changeProject(parent, name) {
     while (parent.firstChild) {
         parent.removeChild(parent.firstChild);
@@ -48,16 +60,28 @@ function loadProject(project) {
 
 }
 
-let test = new todo ('test');
-let test2 = new todo ('work out');
 
-const defaults = createProject('default', 'NA', 'blue', [test, test2]);
+function runDefault() {
+    if (projects.length == 0) {
+        let test = new todo ('test');
+        let test2 = new todo ('work out');
+        const defaults = createProject('Default', 'NA', 'blue', [test, test2]);
+        projects.push(defaults);
+        let currentProject = defaults;
+        addProjects('defaults');
+        addProjectbtn('Default', defaults);
+        loadProject(defaults);
+    }
+}
+
+runDefault();
 
 const Todos = document.querySelector('.add');
 Todos.addEventListener('click', () => {
     if (entry.value != '') {
         currentProject.addTodo(entry.value);
-        entry.value = '' 
+        entry.value = '';
+        localStorage.setItem("projects", JSON.stringify(projects)); 
     }
 });
 
@@ -70,8 +94,7 @@ entry.addEventListener('keyup', function(event)  {
       }
 })
 
-let currentProject = defaults;
-projects.push(defaults);
+
 
 function addTodos(text, project, completed, index) {
     let list = document.querySelector('.list');
@@ -111,6 +134,7 @@ function addTodos(text, project, completed, index) {
     deleteTodo.addEventListener('click', () => {
         todoDiv.parentNode.removeChild(todoDiv);
         project.list.splice(index, 1);
+        localStorage.setItem("projects", JSON.stringify(projects)); 
     })
 
     if (project) {
@@ -157,6 +181,7 @@ function createForm() {
             let newProject = createProject(name, description, dueDate, []);
             addProjectbtn(name, newProject);
             projects.push(newProject);
+            localStorage.setItem("projects", JSON.stringify(projects)); 
             closeForm();
         }
     })
@@ -192,8 +217,6 @@ function addProjectbtn(name, project) {
     });
 }
 
-addProjects('defaults');
-addProjectbtn('Default', defaults);
 
 
 
@@ -230,4 +253,38 @@ function closeForm() {
     formContainer.style.display = 'none';
 }
 
-loadProject(defaults);
+
+function storageAvailable(type) {
+    var storage;
+    try {
+        storage = window[type];
+        var x = '__storage_test__';
+        storage.setItem(x, x);
+        storage.removeItem(x);
+        return true;
+    }
+    catch(e) {
+        return e instanceof DOMException && (
+            // everything except Firefox
+            e.code === 22 ||
+            // Firefox
+            e.code === 1014 ||
+            // test name field too, because code might not be present
+            // everything except Firefox
+            e.name === 'QuotaExceededError' ||
+            // Firefox
+            e.name === 'NS_ERROR_DOM_QUOTA_REACHED') &&
+            // acknowledge QuotaExceededError only if there's something already stored
+            (storage && storage.length !== 0);
+    }
+}
+
+function getProjects() {
+    var newProject = JSON.parse(localStorage.getItem("projects"));
+    if (newProject) {
+        newProject.forEach(proj => {
+            let cur = createProject(proj.name, proj.description, proj.color, proj.list);
+            projects.push(cur);
+        });
+    }
+}
