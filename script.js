@@ -194,11 +194,12 @@ function addProjects(text) {
     
     btn.addEventListener('click', () => {
         formContainer.style.display = 'flex';
+        console.log('yeet');
     });
 }
 
 createForm();
-
+addProjects();
 
 function addProjectbtn(name, project) {
     let projectContainer = document.querySelector('.project-headers');
