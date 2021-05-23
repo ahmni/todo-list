@@ -93,13 +93,13 @@ li {
     order: 99;
 }
 
-#form { 
+#project-form, #todo-form { 
     text-align: center;  
     display: none;
     justify-content: center;
 }
 
-#formcontent {
+#formcontent, #formcontent1 {
     border: 2px solid;
     width: 300px;
     height: 400px;
@@ -108,7 +108,7 @@ li {
     background-color: black;
 }
 
-#close {
+#close, #close1 {
     text-align: left;
     color: red;
     font-size: 36px;
@@ -187,4 +187,8 @@ li {
 
 .complete:active, .delete:active {
     top: .1em;
+}
+
+.edit:hover {
+    filter: invert(63%) sepia(2%) saturate(2%) hue-rotate(324deg) brightness(98%) contrast(80%);
 }
